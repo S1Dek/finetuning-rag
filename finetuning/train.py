@@ -4,7 +4,7 @@ from transformers import AutoTokenizer, AutoModelForCausalLM, TrainingArguments
 from peft import LoraConfig, get_peft_model
 from trl import SFTTrainer
 
-MODEL_NAME = "google/gemma-3-12b-it"
+MODEL_NAME = "google/gemma-4:31b"
 
 dataset = load_dataset("json", data_files="dataset.jsonl")
 
