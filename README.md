@@ -147,7 +147,7 @@ Skrypt:
 | Źródło modelu      | HuggingFace (pobiera)   | Ollama (lokalne GGUF)             |
 | Wymaga HF token    | Tak (jednorazowo)       | Nie                               |
 | Konwersja formatów | HF→GGUF (po treningu)   | GGUF→HF→GGUF (przed i po)         |
-| Stabilność         | ⭐⭐⭐⭐⭐ Sprawdzona   | ⭐⭐⭐ Zależy od wsparcia Gemma 4 |
+| Stabilność         | Sprawdzona   | Zależy od wsparcia Gemma 4 |
 | Zalecany dla       | Pierwszego uruchomienia | Gdy nie chcesz zakładać konta HF  |
 
 ## Monitorowanie
