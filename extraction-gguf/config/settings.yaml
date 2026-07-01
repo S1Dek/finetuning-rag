@@ -1,0 +1,59 @@
+# ============================================================
+# PAZPIK - extraction-gguf
+# Główny plik konfiguracyjny
+# ============================================================
+
+paths:
+  # Katalogi z danymi
+  finetune_pdfs: "data/finetune"
+  rag_pdfs: "data/rag"
+  
+  # Gdzie zapisywać modele i adaptery
+  adapters_dir: "models/adapters"
+  vectordb_dir: "vectordb"
+  
+  # Tymczasowe katalogi
+  temp_dir: "/tmp/pazpik"
+  corpus_output: "data/finetune_corpus.txt"
+  converted_model_dir: "models/converted_hf"   # GGUF -> HF (tymczasowo)
+
+training:
+  # Parametry LoRA
+  lora_r: 16
+  lora_alpha: 32
+  lora_dropout: 0.05
+  target_modules: "all-linear"
+  
+  # Parametry treningu
+  sequence_length: 2048
+  batch_size_per_device: 1
+  gradient_accumulation_steps: 8
+  learning_rate: 2.0e-4
+  num_epochs: 3
+  warmup_steps: 10
+  logging_steps: 10
+  save_steps: 100
+  max_steps: -1     # -1 = całe epoki
+
+quantization:
+  load_in_4bit: true
+  bnb_4bit_compute_dtype: "bfloat16"
+  bnb_4bit_quant_type: "nf4"
+  bnb_4bit_use_double_quant: true
+
+vision:
+  model: "gemma4-vision:9b"
+  prompt: "Opisz szczegółowo ten schemat techniczny z dokumentu lotnictwa cywilnego. Wymień wszystkie elementy, połączenia i ich przeznaczenie."
+  schematic_color_threshold: 0.3
+  min_image_width: 100
+  min_image_height: 100
+
+ollama:
+  base_url: "http://localhost:11434"
+
+gguf:
+  # Katalog z narzędziami llama.cpp (do konwersji safetensors -> GGUF)
+  llamacpp_dir: "tools/llama.cpp"
+  # Domyslny katalog blobs Ollamy
+  ollama_blobs_dir: "~/.ollama/models/blobs"
+  ollama_manifests_dir: "~/.ollama/models/manifests"

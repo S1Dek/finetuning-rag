@@ -1,0 +1,65 @@
+# ============================================================
+# PAZPIK - automatic-huggingface
+# Główny plik konfiguracyjny
+# ============================================================
+
+paths:
+  # Katalogi z danymi
+  finetune_pdfs: "data/finetune"
+  rag_pdfs: "data/rag"
+  
+  # Gdzie zapisywać modele i adaptery
+  adapters_dir: "models/adapters"
+  vectordb_dir: "vectordb"
+  
+  # Tymczasowe katalogi
+  temp_dir: "/tmp/pazpik"
+  corpus_output: "data/finetune_corpus.txt"
+
+training:
+  # Parametry LoRA
+  lora_r: 16
+  lora_alpha: 32
+  lora_dropout: 0.05
+  target_modules: "all-linear"
+  
+  # Parametry treningu
+  sequence_length: 2048
+  batch_size_per_device: 1
+  gradient_accumulation_steps: 8
+  learning_rate: 2.0e-4
+  num_epochs: 3
+  warmup_steps: 10
+  logging_steps: 10
+  save_steps: 100
+  max_steps: -1     # -1 = całe epoki
+
+quantization:
+  load_in_4bit: true
+  bnb_4bit_compute_dtype: "bfloat16"
+  bnb_4bit_quant_type: "nf4"
+  bnb_4bit_use_double_quant: true
+
+vision:
+  model: "gemma4-vision:9b"
+  prompt: "Opisz szczegółowo ten schemat techniczny z dokumentu lotnictwa cywilnego. Wymień wszystkie elementy, połączenia i ich przeznaczenie."
+  schematic_color_threshold: 0.3
+  min_image_width: 100
+  min_image_height: 100
+
+ollama:
+  base_url: "http://localhost:11434"
+
+model_mapping:
+  # Mapowanie nazw modeli Ollama -> HuggingFace
+  gemma4:31b: "google/gemma-4-31b-it"
+  gemma4:9b: "google/gemma-4-9b-it"
+  gemma3:27b: "google/gemma-3-27b-it"
+  gemma3:12b: "google/gemma-3-12b-it"
+  gemma3:1b: "google/gemma-3-1b-it"
+  llama3.1:70b: "meta-llama/Llama-3.1-70b-chat-hf"
+  llama3.1:8b: "meta-llama/Llama-3.1-8b-chat-hf"
+  llama3:70b: "meta-llama/Llama-3-70b-chat-hf"
+  llama3:8b: "meta-llama/Llama-3-8b-chat-hf"
+  mistral:7b: "mistralai/Mistral-7B-v0.1"
+  mixtral:8x7b: "mistralai/Mixtral-8x7B-v0.1"
