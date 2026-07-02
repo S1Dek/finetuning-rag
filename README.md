@@ -1,4 +1,4 @@
-# PAZPIK - Fine-tuning + RAG dla modeli językowych (Lotnictwo Cywilne)
+# PAZPIK - Fine-tuning + RAG dla modeli językowych
 
 Projekt do QLoRA fine-tuningu oraz RAG na dokumentach PDF dotyczących lotnictwa cywilnego.
 
